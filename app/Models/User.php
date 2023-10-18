@@ -19,6 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'nim',
         'email',
         'password',
     ];
@@ -41,4 +42,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role()
+    {
+        return $this->belongsToMany(Role::class, 'user_roles');
+    }
+
+    public function superAdmin()
+    {
+        return $this->role()->first()->id == 1;
+    }
+
+    public function admin()
+    {
+        return $this->role()->first()->id == 2;
+    }
 }
