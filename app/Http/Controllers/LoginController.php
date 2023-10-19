@@ -30,7 +30,7 @@ class LoginController extends Controller
                     return response()->json([
                         'status' => 400,
                         'message' => 'password or email and nim is wrong',
-                    ]);
+                    ], 400);
                 }
 
                 return response()->json([

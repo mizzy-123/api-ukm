@@ -48,6 +48,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'user_roles');
     }
 
+    public function organization()
+    {
+        return $this->belongsToMany(Organization::class, 'user_organizations');
+    }
+
     public function superAdmin()
     {
         return $this->role()->first()->id == 1;

@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -36,5 +37,26 @@ class DatabaseSeeder extends Seeder
 
         $superAdmin = User::factory()->create();
         $superAdmin->role()->attach(1);
+        $anggota = [
+            [
+                'name' => fake()->name(),
+                'nim' => '4.33.21.2.17',
+                'email' => fake()->unique()->safeEmail(),
+                'email_verified_at' => now(),
+                'password' => Hash::make('123456789'),
+            ],
+            [
+                'name' => fake()->name(),
+                'nim' => '4.33.21.2.18',
+                'email' => fake()->unique()->safeEmail(),
+                'email_verified_at' => now(),
+                'password' => Hash::make('123456789'),
+            ],
+        ];
+
+        foreach ($anggota as $a) {
+            $user = User::create($a);
+            $user->role()->attach(1);
+        }
     }
 }
