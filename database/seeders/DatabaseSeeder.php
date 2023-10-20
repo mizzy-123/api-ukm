@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -56,7 +57,23 @@ class DatabaseSeeder extends Seeder
 
         foreach ($anggota as $a) {
             $user = User::create($a);
-            $user->role()->attach(1);
+            $user->role()->attach(3);
         }
+
+        $admin = [
+            'name' => fake()->name(),
+            'nim' => '4.33.21.2.19',
+            'email' => fake()->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456789'),
+        ];
+
+        Organization::create([
+            'name_organization' => 'PCC',
+        ]);
+
+        $adminUser = User::create($admin);
+        $adminUser->role()->attach(2);
+        $adminUser->organization()->attach(1);
     }
 }
