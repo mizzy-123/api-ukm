@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TampilFormPendaftaranResources extends JsonResource
+class ShowMyroleAndOrganizationResources extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,12 @@ class TampilFormPendaftaranResources extends JsonResource
     {
         return [
             "id" => $this->id,
-            "status" => $this->status,
-            "name_organization" => $this->organization->name_organization,
-            "created_at" => $this->created_at,
-            "expired" => $this->expired,
+            "name" => $this->name,
+            "email" => $this->email,
+            "nim" => $this->nim,
+            "telepon" => $this->no_telepon,
+            "organization" => $this->organization,
+            "role" => $this->role
         ];
     }
 }

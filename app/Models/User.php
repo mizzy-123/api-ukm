@@ -45,13 +45,23 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->belongsToMany(Role::class, 'user_roles');
+        return $this->belongsToMany(Role::class, 'user_role_organizations');
     }
 
     public function organization()
     {
-        return $this->belongsToMany(Organization::class, 'user_organizations');
+        return $this->belongsToMany(Organization::class, 'user_role_organizations');
     }
+
+    // public function role_ukm()
+    // {
+    //     return $this->belongsToMany(Role::class, 'user_role_organizations');
+    // }
+
+    // public function organization_ukm()
+    // {
+    //     return $this->belongsToMany(Organization::class, 'user_role_organizations');
+    // }
 
     public function superAdmin()
     {

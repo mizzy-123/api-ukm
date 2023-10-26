@@ -12,6 +12,7 @@ class RekrutUkmController extends Controller
     {
         $cek = Form::create([
             'organization_id' => $request->organization_id,
+            'expired' => $request->expired,
             'status' => true,
         ]);
 
@@ -36,6 +37,17 @@ class RekrutUkmController extends Controller
         return response()->json([
             'status' => 200,
             'data' => TampilFormPendaftaranResources::collection($form),
+        ]);
+    }
+
+    public function cancel(Form $form)
+    {
+        $form->update([
+            'status' => false,
+        ]);
+        return response()->json([
+            'status' => 200,
+            'message' => 'Cancel successfull'
         ]);
     }
 }

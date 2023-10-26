@@ -36,8 +36,12 @@ class DatabaseSeeder extends Seeder
             'name' => 'Anggota',
         ]);
 
+        $organization2 = Organization::create([
+            'name_organization' => 'None',
+        ]);
+
         $superAdmin = User::factory()->create();
-        $superAdmin->role()->attach(1);
+        $superAdmin->role()->attach(1, ['organization_id' => $organization2->id]);
         $anggota = [
             [
                 'name' => fake()->name(),
@@ -55,11 +59,6 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
-        foreach ($anggota as $a) {
-            $user = User::create($a);
-            $user->role()->attach(3);
-        }
-
         $admin = [
             'name' => fake()->name(),
             'nim' => '4.33.21.2.19',
@@ -68,12 +67,54 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123456789'),
         ];
 
-        Organization::create([
+        $organization = Organization::create([
             'name_organization' => 'PCC',
         ]);
 
         $adminUser = User::create($admin);
-        $adminUser->role()->attach(2);
-        $adminUser->organization()->attach(1);
+        $adminUser->role()->attach(2, ['organization_id' => $organization->id]);
+        // $adminUser->organization()->attach(1);
+
+        foreach ($anggota as $a) {
+            $user = User::create($a);
+            $user->role()->attach(3, ['organization_id' => $organization->id]);
+        }
+
+        $anggota2 = [
+            [
+                'name' => fake()->name(),
+                'nim' => '4.33.21.2.20',
+                'email' => fake()->unique()->safeEmail(),
+                'email_verified_at' => now(),
+                'password' => Hash::make('123456789'),
+            ],
+            [
+                'name' => fake()->name(),
+                'nim' => '4.33.21.2.21',
+                'email' => fake()->unique()->safeEmail(),
+                'email_verified_at' => now(),
+                'password' => Hash::make('123456789'),
+            ],
+        ];
+
+        $organization2 = Organization::create([
+            'name_organization' => 'PECC',
+        ]);
+
+        foreach ($anggota2 as $a) {
+            $user = User::create($a);
+            $user->role()->attach(3, ['organization_id' => $organization2->id]);
+        }
+
+        $admin2 = [
+            'name' => fake()->name(),
+            'nim' => '4.33.21.2.01',
+            'email' => fake()->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456789'),
+        ];
+
+        $adminUser2 = User::create($admin2);
+        $adminUser2->role()->attach(2, ['organization_id' => $organization2->id]);
     }
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('organization_id')->constrained('organizations');
             $table->boolean('status')->default(false);
+            $table->date('expired')->nullable();
             $table->timestamps();
         });
     }

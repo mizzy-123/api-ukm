@@ -56,4 +56,11 @@ class LoginController extends Controller
             'message' => 'Logout successfull'
         ]);
     }
+
+    public function cek()
+    {
+        return response()->json([
+            'status' => 200
+        ]);
+    }
 }

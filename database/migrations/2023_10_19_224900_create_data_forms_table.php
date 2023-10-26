@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('no_telepon');
             $table->enum('kelamin', ['PRIA', 'WANITA']);
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
