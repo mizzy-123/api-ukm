@@ -36,6 +36,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/logout', [LoginController::class, 'logout']);
     Route::get('/allUser', [UserController::class, 'index']);
     Route::get('/myrole', [UserController::class, 'showRole']);
+    Route::get('/me', [UserController::class, 'me']);
+    Route::get('/myorganization', [UserController::class, 'myorganization']);
 });
 
 Route::middleware(['auth:sanctum', 'Admin'])->group(function () {

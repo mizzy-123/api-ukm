@@ -15,4 +15,9 @@ class Form extends Model
     {
         return $this->belongsTo(Organization::class, 'organization_id');
     }
+
+    public function dataform()
+    {
+        return $this->hasMany(Dataform::class, 'form_id');
+    }
 }

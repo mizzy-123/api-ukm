@@ -54,7 +54,7 @@ class DaftarUkmController extends Controller
 
     public function index(Request $request)
     {
-        $data = Form::where('organization_id', $request->organization_id)->orderByDesc('created_at')->get();
+        $data = Form::where('organization_id', $request->organization_id)->orderByDesc('id')->withCount('dataform')->get();
         return response()->json([
             'status' => 200,
             'data' => $data
@@ -63,7 +63,8 @@ class DaftarUkmController extends Controller
 
     public function showAll(Request $request)
     {
-        $data = DataForm::where('form_id', $request->form_id)->whereNotIn('status', [true])->orderByDesc('created_at')->get();
+        $data = DataForm::where('form_id', $request->form_id)->whereNotIn('status', [true])
+            ->orderByDesc('id')->filter(request(['search']))->paginate(8)->withQueryString();
         return response()->json([
             'status' => 200,
             'data' => $data

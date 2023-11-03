@@ -65,11 +65,11 @@ class User extends Authenticatable
 
     public function superAdmin()
     {
-        return $this->role()->first()->id == 1;
+        return $this->role->contains('id', 1);
     }
 
     public function admin()
     {
-        return $this->role()->first()->id == 2;
+        return $this->role->contains('id', 2);
     }
 }
