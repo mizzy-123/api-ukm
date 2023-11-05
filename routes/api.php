@@ -47,4 +47,6 @@ Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
     Route::get('/formulir', [DaftarUkmController::class, 'index']);
     Route::get('/daftar-calon', [DaftarUkmController::class, 'showAll']);
     Route::post('/angkat-calon/{dataform}', [DaftarUkmController::class, 'angkat_calon']);
+    Route::post('/select-angkat-calon', [DaftarUkmController::class, 'select_angkat_calon']);
+    Route::post('/select-reject-calon', [DaftarUkmController::class, 'select_reject_calon']);
 });

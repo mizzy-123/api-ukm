@@ -26,5 +26,9 @@ class DataForm extends Model
                     ->orWhere('no_telepon', 'like', '%' . $search . '%');
             });
         });
+
+        $query->when($filters['status'] ?? false, function ($query, $status) {
+            return $query->where("status", $status);
+        });
     }
 }

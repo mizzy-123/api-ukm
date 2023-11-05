@@ -22,6 +22,7 @@ class User extends Authenticatable
         'nim',
         'email',
         'password',
+        'no_telepon'
     ];
 
     /**

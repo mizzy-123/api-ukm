@@ -32,7 +32,7 @@ class RekrutUkmController extends Controller
     public function showAll()
     {
         $form = Form::with(['organization' => function ($query) {
-            $query->select('id', 'name_organization');
+            $query->select('id', 'name_organization', 'foto');
         }])->whereNotIn('status', [false])->get();
         return response()->json([
             'status' => 200,

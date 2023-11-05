@@ -18,6 +18,7 @@ class TampilFormPendaftaranResources extends JsonResource
             "id" => $this->id,
             "status" => $this->status,
             "name_organization" => $this->organization->name_organization,
+            "foto" => $this->organization->foto,
             "created_at" => $this->created_at,
             "expired" => $this->expired,
         ];
