@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('forms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('organization_id')->constrained('organizations');
+            $table->foreignId('organization_id')->constrained('organizations')->onDelete('cascade');
             $table->boolean('status')->default(false);
             $table->date('expired')->nullable();
             $table->timestamps();

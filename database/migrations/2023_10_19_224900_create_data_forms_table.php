@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('data_forms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('form_id')->constrained('forms');
+            $table->foreignId('form_id')->constrained('forms')->onDelete('cascade');
             $table->string('name');
             $table->string('nim');
             $table->string('email');

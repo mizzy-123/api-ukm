@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DaftarUkmController;
+use App\Http\Controllers\JadwalPiketController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RekrutUkmController;
@@ -38,6 +39,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/myrole', [UserController::class, 'showRole']);
     Route::get('/me', [UserController::class, 'me']);
     Route::get('/myorganization', [UserController::class, 'myorganization']);
+    Route::get('/jadwal-piket', [JadwalPiketController::class, 'showAll']);
+    Route::get('/jadwal-piket/organization', [JadwalPiketController::class, 'show_piket_org']);
 });
 
 Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
@@ -49,4 +52,7 @@ Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
     Route::post('/angkat-calon/{dataform}', [DaftarUkmController::class, 'angkat_calon']);
     Route::post('/select-angkat-calon', [DaftarUkmController::class, 'select_angkat_calon']);
     Route::post('/select-reject-calon', [DaftarUkmController::class, 'select_reject_calon']);
+    Route::post('/add-petugas-piket', [JadwalPiketController::class, 'add_petugas_piket']);
+    Route::delete('/delete-petugas-piket/{userpiket}', [JadwalPiketController::class, 'delete_petugas_piket']);
+    Route::put('/update-petugas-piket', [JadwalPiketController::class, 'update_petugas_piket']);
 });
