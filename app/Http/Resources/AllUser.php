@@ -19,6 +19,7 @@ class AllUser extends JsonResource
             "name" => $this->name,
             "nim" => $this->nim,
             "email" => $this->email,
+            "no_telepon" => $this->no_telepon,
             "organization" => $this->organization,
             "role" => $this->role,
         ];

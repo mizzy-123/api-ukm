@@ -3,6 +3,7 @@
 use App\Http\Controllers\DaftarUkmController;
 use App\Http\Controllers\JadwalPiketController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ManageUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RekrutUkmController;
 use App\Http\Controllers\UserController;
@@ -41,6 +42,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/myorganization', [UserController::class, 'myorganization']);
     Route::get('/jadwal-piket', [JadwalPiketController::class, 'showAll']);
     Route::get('/jadwal-piket/organization', [JadwalPiketController::class, 'show_piket_org']);
+    Route::get('/all-organization', [ManageUserController::class, 'all_organization']);
+    Route::get('/user-organization', [ManageUserController::class, 'user_organization']);
 });
 
 Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
@@ -55,4 +58,9 @@ Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
     Route::post('/add-petugas-piket', [JadwalPiketController::class, 'add_petugas_piket']);
     Route::delete('/delete-petugas-piket/{userpiket}', [JadwalPiketController::class, 'delete_petugas_piket']);
     Route::put('/update-petugas-piket', [JadwalPiketController::class, 'update_petugas_piket']);
+});
+
+Route::middleware(['auth:sanctum', 'superAdmin'])->group(function () {
+    Route::post('/ganti-role', [ManageUserController::class, 'ganti_role']);
+    Route::get('/all-role-except-sa', [ManageUserController::class, 'all_role_except_sa']);
 });
