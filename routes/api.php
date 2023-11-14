@@ -3,6 +3,7 @@
 use App\Http\Controllers\DaftarUkmController;
 use App\Http\Controllers\JadwalPiketController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ManageUkm;
 use App\Http\Controllers\ManageUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RekrutUkmController;
@@ -63,4 +64,6 @@ Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
 Route::middleware(['auth:sanctum', 'superAdmin'])->group(function () {
     Route::post('/ganti-role', [ManageUserController::class, 'ganti_role']);
     Route::get('/all-role-except-sa', [ManageUserController::class, 'all_role_except_sa']);
+    Route::get('/all-organization', [ManageUkm::class, 'all_organization']);
+    Route::post('/tambah-ukm', [ManageUkm::class, 'tambah_ukm']);
 });

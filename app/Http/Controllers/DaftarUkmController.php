@@ -6,6 +6,7 @@ use App\Jobs\RejectSendEmailAccount;
 use App\Jobs\SendEmailAccount;
 use App\Models\DataForm;
 use App\Models\Form;
+use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -120,7 +121,15 @@ class DaftarUkmController extends Controller
         try {
             foreach ($request->data as $d) {
                 $dataform = DataForm::find($d['id']);
-                $cek = User::where('email', $d['email'])->orWhere('nim', $d['nim'])->count();
+                $organization_id = Form::find($d['form_id'])->organization()->first()->id;
+                $cek = Organization::where('id', $organization_id)
+                    ->first()
+                    ->users()
+                    ->where(function ($query) use ($d) {
+                        $query->orWhere('email', $d['email'])
+                            ->orWhere('nim', $d['nim']);
+                    })
+                    ->count();
                 if ($cek == 0) {
                     $user = User::firstOrCreate([
                         'name' => $d['name'],
@@ -129,7 +138,6 @@ class DaftarUkmController extends Controller
                         'no_telepon' => $d['no_telepon'],
                         'password' => Hash::make('123456789'),
                     ]);
-                    $organization_id = $dataform->form()->first()->organization()->first()->id;
                     $user->role()->attach(3, ['organization_id' => $organization_id]);
                     $dataform->update([
                         'status' => true
@@ -166,7 +174,7 @@ class DaftarUkmController extends Controller
             DB::commit();
             return response()->json([
                 'status' => 200,
-                'message' => 'Pengangkatan anggota ukm berhasil'
+                'message' => 'Berhasil di tolak'
             ]);
         } catch (\Throwable $th) {
             DB::rollBack();

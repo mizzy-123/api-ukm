@@ -9,6 +9,8 @@ class Organization extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function users()
     {
         return $this->belongsToMany(User::class, "user_role_organizations");
