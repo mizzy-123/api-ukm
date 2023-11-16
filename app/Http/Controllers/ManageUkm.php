@@ -108,4 +108,42 @@ class ManageUkm extends Controller
             }
         }
     }
+
+    public function edit_ukm(Organization $organization, Request $request)
+    {
+        try {
+            $organization->update([
+                'name_organization' => $request->name_organization,
+            ]);
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Update berhasil',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Server error',
+            ], 500);
+        }
+    }
+
+    public function password_reset(User $user)
+    {
+        try {
+            $user->update([
+                'password' => Hash::make('123456789'),
+            ]);
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Reset password berhasil',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Server error',
+            ], 500);
+        }
+    }
 }

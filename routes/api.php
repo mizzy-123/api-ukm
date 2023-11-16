@@ -66,4 +66,6 @@ Route::middleware(['auth:sanctum', 'superAdmin'])->group(function () {
     Route::get('/all-role-except-sa', [ManageUserController::class, 'all_role_except_sa']);
     Route::get('/all-organization', [ManageUkm::class, 'all_organization']);
     Route::post('/tambah-ukm', [ManageUkm::class, 'tambah_ukm']);
+    Route::put('/edit-ukm/{organization}', [ManageUkm::class, 'edit_ukm']);
+    Route::post('/password-reset/{user}', [ManageUkm::class, 'password_reset']);
 });
