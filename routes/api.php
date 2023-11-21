@@ -5,6 +5,7 @@ use App\Http\Controllers\JadwalPiketController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ManageUkm;
 use App\Http\Controllers\ManageUserController;
+use App\Http\Controllers\RapatProkerController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RekrutUkmController;
 use App\Http\Controllers\UserController;
@@ -45,6 +46,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/jadwal-piket/organization', [JadwalPiketController::class, 'show_piket_org']);
     Route::get('/all-organization', [ManageUserController::class, 'all_organization']);
     Route::get('/user-organization', [ManageUserController::class, 'user_organization']);
+    Route::get('/all-rapat-proker', [RapatProkerController::class, 'all_rapat_proker']);
 });
 
 Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
@@ -59,6 +61,8 @@ Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
     Route::post('/add-petugas-piket', [JadwalPiketController::class, 'add_petugas_piket']);
     Route::delete('/delete-petugas-piket/{userpiket}', [JadwalPiketController::class, 'delete_petugas_piket']);
     Route::put('/update-petugas-piket', [JadwalPiketController::class, 'update_petugas_piket']);
+    Route::post('/rapat-proker', [RapatProkerController::class, 'rapat_proker']);
+    Route::put('/edit-rapat-proker/{rapatproker}', [RapatProkerController::class, 'edit_rapat_proker']);
 });
 
 Route::middleware(['auth:sanctum', 'superAdmin'])->group(function () {
