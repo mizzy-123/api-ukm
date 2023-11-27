@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\DaftarUkmController;
 use App\Http\Controllers\JadwalPiketController;
 use App\Http\Controllers\LoginController;
@@ -47,6 +48,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/all-organization', [ManageUserController::class, 'all_organization']);
     Route::get('/user-organization', [ManageUserController::class, 'user_organization']);
     Route::get('/all-rapat-proker', [RapatProkerController::class, 'all_rapat_proker']);
+    Route::post('/absensi', [AbsenController::class, 'store']);
+    Route::get('/data-presensi', [AbsenController::class, 'show']);
 });
 
 Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
