@@ -50,6 +50,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/all-rapat-proker', [RapatProkerController::class, 'all_rapat_proker']);
     Route::post('/absensi', [AbsenController::class, 'store']);
     Route::get('/data-presensi', [AbsenController::class, 'show']);
+    Route::post('/change-password', [UserController::class, 'change_password']);
 });
 
 Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
@@ -66,6 +67,8 @@ Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
     Route::put('/update-petugas-piket', [JadwalPiketController::class, 'update_petugas_piket']);
     Route::post('/rapat-proker', [RapatProkerController::class, 'rapat_proker']);
     Route::put('/edit-rapat-proker/{rapatproker}', [RapatProkerController::class, 'edit_rapat_proker']);
+    Route::get('/data-organization', [ManageUkm::class, 'data_organization']);
+    Route::post('/update-data-organization/{organization}', [ManageUkm::class, 'update_data_organization']);
 });
 
 Route::middleware(['auth:sanctum', 'superAdmin'])->group(function () {

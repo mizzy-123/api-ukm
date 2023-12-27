@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -93,5 +96,38 @@ class UserController extends Controller
             'status' => 200,
             'data' => $myorganization
         ]);
+    }
+
+    public function change_password(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            "password" => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = Auth::user();
+
+        if ($validate->fails()) {
+            return response()->json([
+                'status' => 400,
+                'message' => $validate->errors()
+            ], 400);
+        } else {
+            $data = $validate->validated();
+            $data['password'] = Hash::make($data['password']);
+
+            try {
+                $user->password = $data['password'];
+                $user->save();
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Change password success',
+                ]);
+            } catch (\Throwable $th) {
+                return response()->json([
+                    'status' => 500,
+                    'message' => 'Server error',
+                ], 500);
+            }
+        }
     }
 }

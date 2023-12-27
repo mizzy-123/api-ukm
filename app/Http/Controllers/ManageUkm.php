@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules;
 
@@ -143,6 +144,49 @@ class ManageUkm extends Controller
             return response()->json([
                 'status' => 500,
                 'message' => 'Server error',
+            ], 500);
+        }
+    }
+
+    public function data_organization(Request $request)
+    {
+        try {
+            $data = Organization::find($request->organization_id);
+            return response()->json([
+                'status' => 200,
+                'data' => $data,
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Server error',
+            ], 500);
+        }
+    }
+
+    public function update_data_organization(Request $request, Organization $organization)
+    {
+        try {
+            if ($request->file('foto')) {
+                if ($organization->foto != null) {
+                    Storage::delete($organization->foto);
+                }
+                $gambar = $request->file('foto')->store('gambar-ukm');
+                $organization->foto = $gambar;
+            }
+            $organization->name_organization = $request->name_organization;
+            $organization->visi = $request->visi;
+            $organization->misi = $request->misi;
+            $organization->save();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'update data organization berhasil',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something wrong',
             ], 500);
         }
     }
