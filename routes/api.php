@@ -51,6 +51,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/absensi', [AbsenController::class, 'store']);
     Route::get('/data-presensi', [AbsenController::class, 'show']);
     Route::post('/change-password', [UserController::class, 'change_password']);
+    Route::get('/profile', [UserController::class, 'profile']);
+    Route::post('/change-profile', [UserController::class, 'change_profile']);
 });
 
 Route::middleware(['auth:sanctum', 'Admin'])->group(function () {

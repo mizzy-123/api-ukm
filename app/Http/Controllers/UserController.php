@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -128,6 +129,55 @@ class UserController extends Controller
                     'message' => 'Server error',
                 ], 500);
             }
+        }
+    }
+
+    public function profile()
+    {
+        $user = Auth::user();
+
+        return response()->json([
+            'status' => 200,
+            'data' => $user
+        ]);
+    }
+
+    public function change_profile(Request $request)
+    {
+        $user = Auth::user();
+
+        $validate = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'nim' => [
+                'required',
+                'string',
+                Rule::unique('users', 'nim')->ignore($user->id),
+            ],
+            'no_telepon' => 'required|string',
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json([
+                'status' => 400,
+                'message' => $validate->errors(),
+            ], 400);
+        }
+
+        try {
+            $user->name = $request->name;
+            $user->nim = $request->nim;
+            $user->no_telepon = $request->no_telepon;
+            $user->save();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Change profile success',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Server error',
+            ], 500);
         }
     }
 }
