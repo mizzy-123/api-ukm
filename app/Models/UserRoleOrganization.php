@@ -15,4 +15,9 @@ class UserRoleOrganization extends Model
     {
         return $this->belongsTo(Organization::class, 'organization_id');
     }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
 }

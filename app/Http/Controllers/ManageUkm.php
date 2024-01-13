@@ -190,4 +190,18 @@ class ManageUkm extends Controller
             ], 500);
         }
     }
+
+    public function get_all_organization()
+    {
+        $organizations = Organization::orderByDesc('id')->whereNotIn('id', [1])->get();
+        $totalOrganization = $organizations->count();
+
+        return response()->json([
+            'status' => 200,
+            'data' => [
+                'organization' => $organizations,
+                'total' => $totalOrganization
+            ]
+        ]);
+    }
 }

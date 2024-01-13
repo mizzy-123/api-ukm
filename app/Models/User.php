@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -84,5 +86,12 @@ class User extends Authenticatable
                     ->orWhere('no_telepon', 'like', '%' . $search . '%');
             });
         });
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $userName = $this->name;
+        $email = $this->email;
+        $this->notify(new ResetPasswordNotification($token, $userName, $email));
     }
 }

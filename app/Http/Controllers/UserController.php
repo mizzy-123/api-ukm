@@ -88,11 +88,12 @@ class UserController extends Controller
     public function myorganization(Request $request)
     {
         $user = Auth::user();
-        $myorganization = Organization::whereHas('users', function ($query) use ($user) {
-            $query->where('users.id', $user->id);
-        })->whereHas('roles', function ($query) use ($request) {
-            $query->where('roles.id', $request->role_id);
-        })->get();
+        // $myorganization = Organization::whereHas('users', function ($query) use ($user) {
+        //     $query->where('users.id', $user->id);
+        // })->whereHas('roles', function ($query) use ($request) {
+        //     $query->where('roles.id', $request->role_id);
+        // })->get();
+        $myorganization = $user->organization()->wherePivot('role_id', $request->role_id)->get();
         return response()->json([
             'status' => 200,
             'data' => $myorganization

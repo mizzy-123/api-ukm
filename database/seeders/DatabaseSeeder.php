@@ -45,14 +45,14 @@ class DatabaseSeeder extends Seeder
         $anggota = [
             [
                 'name' => fake()->name(),
-                'nim' => '4.33.21.2.17',
+                'nim' => '4.33.21.3.17',
                 'email' => fake()->unique()->safeEmail(),
                 'email_verified_at' => now(),
                 'password' => Hash::make('123456789'),
             ],
             [
                 'name' => fake()->name(),
-                'nim' => '4.33.21.2.18',
+                'nim' => '4.33.21.3.18',
                 'email' => fake()->unique()->safeEmail(),
                 'email_verified_at' => now(),
                 'password' => Hash::make('123456789'),
@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
 
         $admin = [
             'name' => fake()->name(),
-            'nim' => '4.33.21.2.19',
+            'nim' => '4.33.21.3.19',
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('123456789'),
@@ -83,14 +83,14 @@ class DatabaseSeeder extends Seeder
         $anggota2 = [
             [
                 'name' => fake()->name(),
-                'nim' => '4.33.21.2.20',
+                'nim' => '4.33.21.3.20',
                 'email' => fake()->unique()->safeEmail(),
                 'email_verified_at' => now(),
                 'password' => Hash::make('123456789'),
             ],
             [
                 'name' => fake()->name(),
-                'nim' => '4.33.21.2.21',
+                'nim' => '4.33.21.3.21',
                 'email' => fake()->unique()->safeEmail(),
                 'email_verified_at' => now(),
                 'password' => Hash::make('123456789'),
@@ -108,7 +108,7 @@ class DatabaseSeeder extends Seeder
 
         $admin2 = [
             'name' => fake()->name(),
-            'nim' => '4.33.21.2.01',
+            'nim' => '4.33.21.3.01',
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('123456789'),
@@ -116,5 +116,9 @@ class DatabaseSeeder extends Seeder
 
         $adminUser2 = User::create($admin2);
         $adminUser2->role()->attach(2, ['organization_id' => $organization2->id]);
+
+        $this->call([
+            JadwalPiketSeeder::class
+        ]);
     }
 }

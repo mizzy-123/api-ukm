@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\DaftarUkmController;
+use App\Http\Controllers\ForgotPassword;
 use App\Http\Controllers\JadwalPiketController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ManageUkm;
@@ -10,6 +11,7 @@ use App\Http\Controllers\RapatProkerController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RekrutUkmController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WhatssapController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +36,16 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::get('/perekrutan-ukm', [RekrutUkmController::class, 'showAll']);
 
 Route::post('/daftar-ukm', [DaftarUkmController::class, 'store']);
+
+Route::post('/forgot-password', [ForgotPassword::class, 'forgot_password']);
+
+Route::post('/reset-password', [ForgotPassword::class, 'reset_password']);
+
+Route::get('/get-all-organization', [ManageUkm::class, 'get_all_organization']);
+
+Route::get('/get-formulir/{organization}', [DaftarUkmController::class, 'get_formulir']);
+
+Route::get('/get-role', [ManageUserController::class, 'get_role']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/cek-token', [LoginController::class, 'cek']);
@@ -60,6 +72,7 @@ Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
     Route::get('/admin-organization', [UserController::class, 'show_admin_organization']);
     Route::get('/rekrut-cancel/{form}', [RekrutUkmController::class, 'cancel']);
     Route::get('/formulir', [DaftarUkmController::class, 'index']);
+    Route::post('/edit-formulir/{form}', [DaftarUkmController::class, 'edit_formulir']);
     Route::get('/daftar-calon', [DaftarUkmController::class, 'showAll']);
     Route::post('/angkat-calon/{dataform}', [DaftarUkmController::class, 'angkat_calon']);
     Route::post('/select-angkat-calon', [DaftarUkmController::class, 'select_angkat_calon']);
@@ -71,6 +84,10 @@ Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
     Route::put('/edit-rapat-proker/{rapatproker}', [RapatProkerController::class, 'edit_rapat_proker']);
     Route::get('/data-organization', [ManageUkm::class, 'data_organization']);
     Route::post('/update-data-organization/{organization}', [ManageUkm::class, 'update_data_organization']);
+    Route::post('/delete-rapat-proker/{rapatproker}', [RapatProkerController::class, 'delete_rapat_proker']);
+
+    // whatssapp gateway
+    Route::post('/create-session', [WhatssapController::class, 'create_session']);
 });
 
 Route::middleware(['auth:sanctum', 'superAdmin'])->group(function () {

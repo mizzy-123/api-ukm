@@ -81,7 +81,7 @@
                         <tbody>
                             <tr>
                                 <td style="text-align: center; padding-bottom:25px">
-                                    <a href="#"><img style="height: 40px" src="images/logo-dark2x.png" alt="logo"></a>
+                                    <a href="#"><img width="200" src="https://demo.manifestasi.my.id/images/unitease.png" alt="logo"/></a>
                                     <p style="font-size: 14px; color: #6576ff; padding-top: 12px;">Conceptual Base Modern Dashboard Theme</p>
                                 </td>
                             </tr>
@@ -92,9 +92,9 @@
                             <tr>
                                 <td style="padding: 30px 30px 20px">
                                     <p style="margin-bottom: 10px;">Hi {{ $name }},</p>
-                                    <p style="margin-bottom: 10px;">We are pleased to have you as a member of TokenWiz Family.</p>
-                                    <p style="margin-bottom: 10px;">Sorry Your account is now verified and you can purchase tokens for the ICO. Also you can submit your documents for the KYC from my Account page.</p>
-                                    <p style="margin-bottom: 15px;">Hope you'll enjoy the experience, we're here if you have any questions, drop us a line at <a style="color: #6576ff; text-decoration:none;" href="mailto:info@yourwebsite.com">info@yourwebsite.com</a> anytime. </p>
+                                    <p style="margin-bottom: 10px;">We are pleased to have you as a member.</p>
+                                    <p style="margin-bottom: 10px;">Sorry Your account is not accepted.</p>
+                                    <p style="margin-bottom: 15px;">Hope you'll try again next later <a style="color: #6576ff; text-decoration:none;" href="mailto:info@yourwebsite.com">info@yourwebsite.com</a> anytime. </p>
                                 </td>
                             </tr>
                         </tbody>
@@ -103,13 +103,13 @@
                         <tbody>
                             <tr>
                                 <td style="text-align: center; padding:25px 20px 0;">
-                                    <p style="font-size: 13px;">Copyright © 2020 DashLite. All rights reserved. <br> Template Made By <a style="color: #6576ff; text-decoration:none;" href="https://themeforest.net/user/softnio/portfolio">Softnio</a>.</p>
-                                    <ul style="margin: 10px -4px 0;padding: 0;">
+                                    <p style="font-size: 13px;">Copyright © 2024 UNITease. All rights reserved. <br> Template Made By <a style="color: #6576ff; text-decoration:none;" href="https://themeforest.net/user/softnio/portfolio">Softnio</a>.</p>
+                                    {{-- <ul style="margin: 10px -4px 0;padding: 0;">
                                         <li style="display: inline-block; list-style: none; padding: 4px;"><a style="display: inline-block; height: 30px; width:30px;border-radius: 50%; background-color: #ffffff" href="#"><img style="width: 30px" src="images/brand-b.png" alt="brand"></a></li>
                                         <li style="display: inline-block; list-style: none; padding: 4px;"><a style="display: inline-block; height: 30px; width:30px;border-radius: 50%; background-color: #ffffff" href="#"><img style="width: 30px" src="images/brand-e.png" alt="brand"></a></li>
                                         <li style="display: inline-block; list-style: none; padding: 4px;"><a style="display: inline-block; height: 30px; width:30px;border-radius: 50%; background-color: #ffffff" href="#"><img style="width: 30px" src="images/brand-d.png" alt="brand"></a></li>
                                         <li style="display: inline-block; list-style: none; padding: 4px;"><a style="display: inline-block; height: 30px; width:30px;border-radius: 50%; background-color: #ffffff" href="#"><img style="width: 30px" src="images/brand-c.png" alt="brand"></a></li>
-                                    </ul>
+                                    </ul> --}}
                                     <p style="padding-top: 15px; font-size: 12px;">This email was sent to you as a registered user of <a style="color: #6576ff; text-decoration:none;" href="https://softnio.com">softnio.com</a>. To update your emails preferences <a style="color: #6576ff; text-decoration:none;" href="#">click here</a>.</p>
                                 </td>
                             </tr>

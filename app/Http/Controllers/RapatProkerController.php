@@ -9,6 +9,23 @@ use Illuminate\Support\Facades\Validator;
 
 class RapatProkerController extends Controller
 {
+
+    public function delete_rapat_proker(RapatProker $rapatproker)
+    {
+        try {
+            $rapatproker->delete();
+            return response()->json([
+                'status' => 200,
+                'message' => 'delete berhasil',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something wrong',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
     public function rapat_proker(Request $request)
     {
         $validate = Validator::make($request->all(), [

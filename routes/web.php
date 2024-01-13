@@ -16,3 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/test', function () {
+    return view('mails.reset-password-template');
+});
+
+Route::get('/reset-password/{token}', function ($token) {
+    // Gunakan $token sesuai kebutuhan Anda
+    return redirect(env("FE_URL") . "/reset-password/$token");
+})->name('password.reset');

@@ -90,11 +90,21 @@
                     <table style="width:100%;max-width:620px;margin:0 auto;background-color:#ffffff;">
                         <tbody>
                             <tr>
-                                <td style="padding: 30px 30px 20px">
+                                <td style="text-align:center;padding: 30px 30px 15px 30px;">
+                                    <h2 style="font-size: 18px; color: #6576ff; font-weight: 600; margin: 0;">Reset Password</h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center;padding: 0 30px 20px">
                                     <p style="margin-bottom: 10px;">Hi {{ $name }},</p>
-                                    <p style="margin-bottom: 10px;">We are pleased to have you as a member of UNITease.</p>
-                                    <p style="margin-bottom: 10px;">Your account is now verified and here your password 123456789</p>
-                                    <p style="margin-bottom: 15px;">Hope you'll enjoy the experience, we're here if you have any questions, drop us a line at <a style="color: #6576ff; text-decoration:none;" href="mailto:info@yourwebsite.com">info@yourwebsite.com</a> anytime. </p>
+                                    <p style="margin-bottom: 25px;">Click On The link blow to reset tour password.</p>
+                                    <a href="http://192.168.43.241:3000/reset-password/{{ $reset }}?email={{ $email }}" style="background-color:#6576ff;border-radius:4px;color:#ffffff;display:inline-block;font-size:13px;font-weight:600;line-height:44px;text-align:center;text-decoration:none;text-transform: uppercase; padding: 0 25px">Reset Password</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center;padding: 20px 30px 40px">
+                                    <p>If you did not make this request, please contact us or ignore this message.</p>
+                                    <p style="margin: 0; font-size: 13px; line-height: 22px; color:#9ea8bb;">This is an automatically generated email please do not reply to this email. If you face any issues, please contact us at  help@icocrypto.com</p>
                                 </td>
                             </tr>
                         </tbody>

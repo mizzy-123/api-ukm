@@ -15,14 +15,47 @@ use Illuminate\Support\Facades\Validator;
 
 class DaftarUkmController extends Controller
 {
+
+    public function edit_formulir(Form $form, Request $request)
+    {
+
+        try {
+            $form->update([
+                'expired' => $request->expired,
+                'status' => true
+            ]);
+
+            return response()->json([
+                'status' => 200,
+                'message' => "Update successfull",
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 500,
+                'message' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function get_formulir(Organization $organization)
+    {
+        $form = Form::where('organization_id', $organization->id)->latest()->first();
+        return response()->json([
+            'status' => 200,
+            'data' => [
+                'name_organization' => $organization->name_organization,
+                'data' => $form
+            ]
+        ]);
+    }
     public function store(Request $request)
     {
         try {
             $validasi = Validator::make($request->all(), [
                 'form_id' => 'required',
                 'name' => 'required|string',
-                'nim' => 'required|string',
-                'email' => 'required|string|email:dns',
+                'nim' => 'required|string|unique:data_forms',
+                'email' => 'required|string|email:dns|unique:data_forms',
                 'no_telepon' => 'required|string',
                 'kelamin' => 'required|in:PRIA,WANITA',
             ]);
@@ -31,7 +64,7 @@ class DaftarUkmController extends Controller
                 return response()->json([
                     'status' => 400,
                     'message' => $validasi->errors()
-                ]);
+                ], 400);
             }
 
             $validated = $validasi->validated();
@@ -53,7 +86,7 @@ class DaftarUkmController extends Controller
             return response()->json([
                 'status' => 500,
                 'message' => $th,
-            ]);
+            ], 500);
         }
     }
 
@@ -122,15 +155,17 @@ class DaftarUkmController extends Controller
             foreach ($request->data as $d) {
                 $dataform = DataForm::find($d['id']);
                 $organization_id = Form::find($d['form_id'])->organization()->first()->id;
-                $cek = Organization::where('id', $organization_id)
-                    ->first()
-                    ->users()
-                    ->where(function ($query) use ($d) {
-                        $query->orWhere('email', $d['email'])
-                            ->orWhere('nim', $d['nim']);
-                    })
-                    ->count();
-                if ($cek == 0) {
+                // $cek = Organization::where('id', $organization_id)
+                //     ->first()
+                //     ->users()
+                //     ->where(function ($query) use ($d) {
+                //         $query->orWhere('email', $d['email'])
+                //             ->orWhere('nim', $d['nim']);
+                //     })
+                //     ->count();
+                $cek = User::where('email', $d['email'])->orWhere('nim', $d['nim'])->first();
+                // $cek == 0
+                if (!$cek) {
                     $user = User::firstOrCreate([
                         'name' => $d['name'],
                         'nim' => $d['nim'],
@@ -144,6 +179,13 @@ class DaftarUkmController extends Controller
                     ]);
 
                     SendEmailAccount::dispatch($user);
+                } else {
+                    if ($dataform->status !== 1) {
+                        $cek->role()->attach(3, ['organization_id' => $organization_id]);
+                        $dataform->update([
+                            'status' => true
+                        ]);
+                    }
                 }
             }
             DB::commit();
@@ -155,7 +197,7 @@ class DaftarUkmController extends Controller
             DB::rollBack();
             return response()->json([
                 'status' => 500,
-                'message' => "Something wrong"
+                'message' => $th->getMessage()
             ], 500);
         }
     }
