@@ -18,6 +18,6 @@ class Form extends Model
 
     public function dataform()
     {
-        return $this->hasMany(Dataform::class, 'form_id');
+        return $this->hasMany(DataForm::class, 'form_id');
     }
 }
