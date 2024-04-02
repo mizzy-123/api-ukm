@@ -98,7 +98,7 @@
                                 <td style="text-align:center;padding: 0 30px 20px">
                                     <p style="margin-bottom: 10px;">Hi {{ $name }},</p>
                                     <p style="margin-bottom: 25px;">Click On The link blow to reset tour password.</p>
-                                    <a href="http://192.168.43.241:3000/reset-password/{{ $reset }}?email={{ $email }}" style="background-color:#6576ff;border-radius:4px;color:#ffffff;display:inline-block;font-size:13px;font-weight:600;line-height:44px;text-align:center;text-decoration:none;text-transform: uppercase; padding: 0 25px">Reset Password</a>
+                                    <a href="{{ env("FE_URL") }}/reset-password/{{ $reset }}?email={{ $email }}" style="background-color:#6576ff;border-radius:4px;color:#ffffff;display:inline-block;font-size:13px;font-weight:600;line-height:44px;text-align:center;text-decoration:none;text-transform: uppercase; padding: 0 25px">Reset Password</a>
                                 </td>
                             </tr>
                             <tr>
